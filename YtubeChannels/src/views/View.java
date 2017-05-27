@@ -163,8 +163,6 @@ public class View extends JFrame implements Observer {
 		headerPanel.add(buttonPanel);
 
 		mainPanel.add(headerPanel, BorderLayout.NORTH);
-
-		// body: results lists
 		// channels
 		listModel = new DefaultListModel<String>();
 		channelList = new JList<String>(listModel);

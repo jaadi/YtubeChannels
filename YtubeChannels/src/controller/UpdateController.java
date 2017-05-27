@@ -28,9 +28,7 @@ public class UpdateController extends Observable {
 	public void updateChannelsFromOpml() {
 
 		File opmlFile = getFile();
-		// C:\Users\Naim\Downloads\opml
-		// File opmlFile = new
-		// File("C:\\Users\\Naim\\Downloads\\opml\\subscription_manager");
+		
 		if (opmlFile == null) {
 			setChanged();
 			notifyObservers(Consts.OPML_NOT_FOUND);
