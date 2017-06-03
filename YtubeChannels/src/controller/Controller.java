@@ -54,13 +54,13 @@ public class Controller implements ActionListener, ListSelectionListener,
 
 			} else if (e.getSource() instanceof JTable) {
 
-				System.out.println("JTable");
+				
 
 			} else if (e.getSource() == view.getVideoTable()
 					.getSelectionModel()) {
 
 				int selectedRow = view.getVideoTable().getSelectedRow();
-				System.out.println(selectedRow);
+				
 				if (selectedRow >= 0) {
 					Video video = view.getVideoList().get(selectedRow);
 					String url = UrlBuilder
@@ -68,7 +68,7 @@ public class Controller implements ActionListener, ListSelectionListener,
 					HttpCallManager.openWebpage(url);
 				}else{
 					
-					System.out.println(selectedRow);
+					
 					return;
 				}
 
@@ -116,6 +116,8 @@ public class Controller implements ActionListener, ListSelectionListener,
 
 			ArrayList<Channel> previewData = view.getPreviewData();
 			updateController.manageVideoUpdate(previewData);
+		} else if (e.getActionCommand().equals(Consts.DESELECT_ALL)) {
+			
 		}
 	}
 

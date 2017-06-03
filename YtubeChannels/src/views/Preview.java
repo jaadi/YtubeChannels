@@ -3,11 +3,14 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,37 +50,68 @@ public class Preview extends JFrame {
 	private void createAndAddComponents() {
 
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
+		//mainPanel.setLayout(new BorderLayout());
+		mainPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 
-		JPanel labelPanel = new JPanel();
-		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
-		labelPanel.setBorder(new EmptyBorder(5, 5, 15, 5));
-
-		JLabel channelCountLabel = new JLabel(Consts.CHANNEL_COUNT);
-		JLabel importVideosLabel = new JLabel(Consts.VIDEOS_TO_IMPORT);
-		JLabel DeleteChannelLabel = new JLabel(Consts.CHANNELS_TO_DELETE);
+//		JPanel labelPanel = new JPanel();
+//		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
+//		labelPanel.setBorder(new EmptyBorder(5, 5, 15, 5));
 
 		Font font = new Font("Courier", Font.PLAIN, 14);
-
+		
+		JLabel channelCountLabel = new JLabel(Consts.CHANNEL_COUNT);		
 		channelCountLabel.setFont(font);
-		channelCountLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
-
+		channelCountLabel.setBorder(new EmptyBorder(3, 3, 3, 3));		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 0;		 
+		mainPanel.add(channelCountLabel,c);		 
+		 
+		JLabel importVideosLabel = new JLabel(Consts.VIDEOS_TO_IMPORT);
 		importVideosLabel.setFont(font);
 		importVideosLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
-
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 1;		 
+		mainPanel.add(importVideosLabel,c);
+		
+		JLabel DeleteChannelLabel = new JLabel(Consts.CHANNELS_TO_DELETE);
 		DeleteChannelLabel.setFont(font);
 		DeleteChannelLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 2;		 
+		mainPanel.add(DeleteChannelLabel,c);		
+		
 		
 		deselectAll = new JButton(Consts.DESELECT_ALL);
+		deselectAll.setPreferredSize(new Dimension(10, 50));
 		deselectAll.setActionCommand(Consts.DESELECT_ALL);
-		deselectAll.setBorder(new EmptyBorder(3, 270, 0, 3));
+		deselectAll.setFont(font);
+		deselectAll.setBorder(new EmptyBorder(3, 3, 3, 3));
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 3;		 
+		mainPanel.add(deselectAll,c);	
+		
+		
+		//Dimension minSize = new Dimension(10, 10);
+		//Dimension prefSize = new Dimension(10, 10);
+		//Dimension maxSize = new Dimension(10,10);
+		//container.add(new Box.Filler(minSize, prefSize, maxSize));
 
-		labelPanel.add(channelCountLabel);
-		labelPanel.add(importVideosLabel);
-		labelPanel.add(DeleteChannelLabel);
-		labelPanel.add(deselectAll);
+		
+		//labelPanel.add(importVideosLabel);
+		//labelPanel.add(DeleteChannelLabel);
+		//labelPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+		//labelPanel.add(deselectAll);
 
-		mainPanel.add(labelPanel, BorderLayout.NORTH);
+		//mainPanel.add(labelPanel, BorderLayout.NORTH);
 		Vector<String> columnsName = getColumnsName();
 		Vector<Object> tableData = getTableData();
 		myTableModel = new MyTableModel(tableData, columnsName);
@@ -86,6 +120,7 @@ public class Preview extends JFrame {
 			public void tableChanged(TableModelEvent e) {
 				if (e.getColumn() == 2 || e.getColumn() == 3) {
 					toggleCheckbox(e.getColumn(), e.getFirstRow());
+					
 				}
 			}
 		});
@@ -97,14 +132,25 @@ public class Preview extends JFrame {
 		// RowListener());
 		// channelTable.getColumnModel().getSelectionModel().
 		// addListSelectionListener(new ColumnListener());
-		mainPanel.add(new JScrollPane(channelTable), BorderLayout.CENTER);
+		c.fill = GridBagConstraints.HORIZONTAL;			
+		c.weightx = 0.0;
+		c.gridwidth = 5;
+		c.gridheight = 5;
+		c.gridx = 0;
+		c.gridy = 4;		
+		mainPanel.add(new JScrollPane(channelTable), c);
+		
+		
 		okButton = new JButton(Consts.PREVIEW_UPDATE);
-		okButton.setActionCommand(Consts.PREVIEW_UPDATE);
+		//deselectAll.setPreferredSize(new Dimension(10, 50));
+		okButton.setActionCommand(Consts.DESELECT_ALL);
+		okButton.setFont(font);
 		okButton.setBorder(new EmptyBorder(3, 3, 3, 3));
-
-		mainPanel.add(okButton, BorderLayout.SOUTH);
-
-		mainPanel.setBorder(new EmptyBorder(15, 5, 5, 5));
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+		c.gridx = 3;
+		c.gridy = 9;		 
+		mainPanel.add(okButton,c);		
 
 		this.setContentPane(mainPanel);
 	}
@@ -141,6 +187,7 @@ public class Preview extends JFrame {
 	public void addListener(EventListener listener) {
 		ActionListener al = (ActionListener) listener;
 		okButton.addActionListener(al);
+		deselectAll.addActionListener(al);
 	}
 
 	public MyTableModel getMyTableModel() {
@@ -169,20 +216,19 @@ public class Preview extends JFrame {
 	private void toggleCheckbox(int column, int firstRow) {
 		// Object valueAt = myTableModel.getValueAt(firstRow, column);
 		// Boolean newValue = (Boolean)valueAt;
-		// System.out.println("185 >> new value of row "+firstRow+" column "+column+" is"+newValue);
+		// .println("185 >> new value of row "+firstRow+" column "+column+" is"+newValue);
 		boolean valueAt2 = (boolean) myTableModel.getValueAt(firstRow, 2);
 		boolean valueAt3 = (boolean) myTableModel.getValueAt(firstRow, 3);
-
-		if (column == 2) {
-			if (valueAt2 == valueAt3) {
-				myTableModel.setValueAt(!valueAt3, firstRow, 3);
+		
+		if(column == 2){
+			if ( valueAt2 ) {
+				myTableModel.setValueAt(false, firstRow, 3);
+			} 
+		}else if (column == 3) {
+			if (valueAt3) {
+				myTableModel.setValueAt(false, firstRow, 2);
 			}
-		} else if (column == 3) {
-			if (valueAt2 == valueAt3) {
-				myTableModel.setValueAt(!valueAt2, firstRow, 2);
-			}
-		}
-
+		}	
 	}
 
 	@SuppressWarnings("unchecked")
