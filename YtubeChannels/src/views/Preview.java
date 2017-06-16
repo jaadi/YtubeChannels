@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -53,50 +54,34 @@ public class Preview extends JFrame {
 		//mainPanel.setLayout(new BorderLayout());
 		mainPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-
-//		JPanel labelPanel = new JPanel();
-//		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
-//		labelPanel.setBorder(new EmptyBorder(5, 5, 15, 5));
-
 		Font font = new Font("Courier", Font.PLAIN, 14);
 		
 		JLabel channelCountLabel = new JLabel(Consts.CHANNEL_COUNT);		
 		channelCountLabel.setFont(font);
-		channelCountLabel.setBorder(new EmptyBorder(3, 3, 3, 3));		
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
+		c.anchor = GridBagConstraints.LINE_START;		
+		c.gridwidth = 1;		
 		c.gridx = 0;
-		c.gridy = 0;		 
+		c.gridy = 0;	 
 		mainPanel.add(channelCountLabel,c);		 
 		 
 		JLabel importVideosLabel = new JLabel(Consts.VIDEOS_TO_IMPORT);
-		importVideosLabel.setFont(font);
-		importVideosLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
-		c.gridx = 0;
+		importVideosLabel.setFont(font);				
 		c.gridy = 1;		 
 		mainPanel.add(importVideosLabel,c);
 		
 		JLabel DeleteChannelLabel = new JLabel(Consts.CHANNELS_TO_DELETE);
-		DeleteChannelLabel.setFont(font);
-		DeleteChannelLabel.setBorder(new EmptyBorder(3, 3, 3, 3));
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
-		c.gridx = 0;
+		DeleteChannelLabel.setFont(font);	
 		c.gridy = 2;		 
 		mainPanel.add(DeleteChannelLabel,c);		
 		
-		
-		deselectAll = new JButton(Consts.DESELECT_ALL);
-		deselectAll.setPreferredSize(new Dimension(10, 50));
+		deselectAll = new JButton(Consts.DESELECT_ALL);		
 		deselectAll.setActionCommand(Consts.DESELECT_ALL);
-		deselectAll.setFont(font);
-		deselectAll.setBorder(new EmptyBorder(3, 3, 3, 3));
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
+		deselectAll.setFont(font);		
+		c.weighty = 1.0;  
+		c.insets = new Insets(10,0,0,0);  //top padding
+		c.gridwidth = 2;
 		c.gridx = 0;
-		c.gridy = 3;		 
+		c.gridy = 3;		  
 		mainPanel.add(deselectAll,c);	
 		
 		
@@ -132,23 +117,19 @@ public class Preview extends JFrame {
 		// RowListener());
 		// channelTable.getColumnModel().getSelectionModel().
 		// addListSelectionListener(new ColumnListener());
-		c.fill = GridBagConstraints.HORIZONTAL;			
-		c.weightx = 0.0;
+		c.fill = GridBagConstraints.BOTH;		
 		c.gridwidth = 5;
-		c.gridheight = 5;
-		c.gridx = 0;
+		c.gridheight = 5;		
 		c.gridy = 4;		
 		mainPanel.add(new JScrollPane(channelTable), c);
 		
 		
-		okButton = new JButton(Consts.PREVIEW_UPDATE);
-		//deselectAll.setPreferredSize(new Dimension(10, 50));
-		okButton.setActionCommand(Consts.DESELECT_ALL);
-		okButton.setFont(font);
-		okButton.setBorder(new EmptyBorder(3, 3, 3, 3));
+		okButton = new JButton(Consts.PREVIEW_UPDATE);		
+		okButton.setActionCommand(Consts.PREVIEW_UPDATE);
+		okButton.setFont(font);		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
-		c.gridx = 3;
+		c.gridx = 0;
 		c.gridy = 9;		 
 		mainPanel.add(okButton,c);		
 
@@ -247,6 +228,5 @@ public class Preview extends JFrame {
 		}
 
 	}
-
 	
-}
+	}

@@ -118,6 +118,15 @@ public class Controller implements ActionListener, ListSelectionListener,
 			updateController.manageVideoUpdate(previewData);
 		} else if (e.getActionCommand().equals(Consts.DESELECT_ALL)) {
 			
+			int rowCount = view.getPreview().getMyTableModel().getRowCount();
+			
+			for(int i = 0; i < rowCount; i++){
+				
+				view.getPreview().getMyTableModel().setValueAt(false, i, 2);
+				view.getPreview().getMyTableModel().setValueAt(false, i, 3);
+				
+			}
+			
 		}
 	}
 

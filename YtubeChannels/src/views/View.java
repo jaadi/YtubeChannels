@@ -96,7 +96,7 @@ public class View extends JFrame implements Observer {
 		this.setVisible(true);
 
 		// Define if the user can resize the frame (true by default)
-		this.setResizable(false);
+		//this.setResizable(false);
 	}
 
 	private void createAndAddComponents() {
@@ -143,8 +143,8 @@ public class View extends JFrame implements Observer {
 
 		// buttons
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
-		// buttonPanel.setBackground(Color.PINK);
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));		
+		buttonPanel.setBackground(Color.decode("#DAE9D7"));
 
 		searchButton = new JButton(Consts.SEARCH);
 		searchButton.setActionCommand(Consts.SEARCH);
@@ -450,5 +450,11 @@ public class View extends JFrame implements Observer {
 	
 		return previewData;
 	}
+
+	public Preview getPreview() {
+		return preview;
+	}
+	
+	
 
 }
